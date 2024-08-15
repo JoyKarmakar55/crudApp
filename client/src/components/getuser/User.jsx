@@ -25,7 +25,7 @@ const User = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:8000/api/getall");
+      const response = await axios.get("https://crudapp-wjcl.onrender.com/api/getall");
       setUserss(response.data);
     };
 
@@ -82,10 +82,10 @@ const User = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/create", user);
+      await axios.post("https://crudapp-wjcl.onrender.com/api/create", user);
       toast.success("Employee added successfully", { position: "top-center" });
       setShowForm(false);
-      const updatedUsers = await axios.get("http://localhost:8000/api/getall");
+      const updatedUsers = await axios.get("https://crudapp-wjcl.onrender.com/api/getall");
       setUserss(updatedUsers.data);
     } catch (error) {
       console.error("Error adding Employee:", error);
@@ -97,11 +97,11 @@ const User = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/update/${editUser._id}`,
+        `https://crudapp-wjcl.onrender.com/api/update/${editUser._id}`,
         editUser
       );
       toast.success(response.data.msg, { position: "top-center" });
-      const updatedUsers = await axios.get("http://localhost:8000/api/getall");
+      const updatedUsers = await axios.get("https://crudapp-wjcl.onrender.com/api/getall");
       setUserss(updatedUsers.data);
       setShowEditForm(false);
     } catch (error) {
@@ -116,7 +116,7 @@ const User = () => {
         "Are you sure you want to delete this Employee?"
       );
       if (confirmDelete) {
-        await axios.delete(`http://localhost:8000/api/delete/${userId}`);
+        await axios.delete(`https://crudapp-wjcl.onrender.com/api/delete/${userId}`);
         setUserss(userss.filter((user) => user._id !== userId));
         toast.success("Employee deleted successfully", {
           position: "top-center",
@@ -130,7 +130,7 @@ const User = () => {
 
   const handleDeleteSelected = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/delete`, {
+      await axios.delete(`https://crudapp-wjcl.onrender.com/api/delete`, {
         data: { ids: selectedUsers },
       });
       setUserss(userss.filter((user) => !selectedUsers.includes(user._id)));
